@@ -6,6 +6,12 @@ Use [SDCC](http://sdcc.sourceforge.net/) to compile
 
 Use [STC MCU ISP flash tool](https://github.com/grigorig/stcgal) to programm
 
+Install both sdcc and stcgal per instructions (or use distribution packages for sdcc)
+
+make
+make install # will download to the MCU
+
+
 What it supports for now:
 * [x] STC15 UART (baudrate: 115200)
 * [x] Reading on-board DHT11 values
