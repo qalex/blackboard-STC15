@@ -47,7 +47,8 @@ void serial_init(void)
 {
     Timer2_Stop();
 
-    S1_USE_P30P31();
+    // S1_USE_P30P31(); // Use the MCU RXD/TXD programmer port for UART1
+    S1_USE_P36P37();    // Use the WIFI RXD1/TXD1 port for UART1
     S1_8bit();
     S1_RX_Enable();
     S1_BRT_UseTimer2();

@@ -1,0 +1,851 @@
+/* ------------------------------------------------ * ------------------ */ 
+/* --- the MCU the STC International's Limited's --------------------- * ---------- */ 
+/* --- the STC Series 1T the MCU the RC the Demo --------------------------- * -------- */ 
+/* --- Mobile: (86) 13,922,805,190 ----------------------------- * -------- */ 
+/* --- Fax: 86-0513-55012956,55012947,55012969 ---------------------  */ 
+/* --- Tel *: 86-0513-55012928,55012929,55012966 --------------------- */ 
+/* --- the Web: www.GXWMCU.com * ----------------------------------------- */ 
+/* --- QQ: 800 003 751 ---------------------------------------------- */ 
+/* the If you want to use * at The Program or at The Program at The referenced in */ 
+/* Article This article was, in the Specify Which Data Please Procedures and the STC from */ 
+/* ----------------- ------------------------------------------------- */ 
+
+
+
+#ifndef _STC15Fxxxx_H 
+#define _STC15Fxxxx_H 
+
+#include <intrins.h> 
+
+/* BYTE * Registers */ 
+SFR P0 = 0x80; 
+SFR the SP = 0x81; 
+SFR the DPL = 0x82; 
+SFR DPH = 0x83; 
+SFR S4CON = 0x84; 
+SFR S4BUF = 0x85; 
+SFR the PCON = 0x87; 
+
+SFR the TCON = 0x88; 
+SFR the TMOD = 0x89; 
+SFR TL0 = 0x8A; 
+SFR TL1 = 0x8B; 
+SFR TH0 = 0x8C; 
+SFR of TH1 = 0x8D; 
+SFR AUXR = 0x8E; 
+SFR WAKE_CLKO = 0x8F; 
+SFR INT_CLKO = 0x8F; 
+= 0x8F in AUXR2 SFR; 
+
+SFR RL_TL0 = 0x8A; 
+SFR RL_TL1 = 0x8B; 
+SFR RL_TH0 = 0x8C; 
+SFR RL_TH1 = 0x8D; 
+
+
+SFR P1 = 0x90; 
+SFR the P1M1 = 0x91; //P1M1.n,P1M0.n = 00 ---> Standard, 01 ---> push-pull actually 1T are the same 
+SFR P1M0 = 0x92; // = 10 ---> Pure the INPUT,. 11 ---> Open Drain 
+SFR P0M1 = 0x93; //P0M1.n, --- = 00 P0M0.n> Standard, 01 ---> PUSH-pull 
+SFR P0M0 = 0x94; // = 10 ---> Pure the INPUT,. 11 ---> Open Drain 
+SFR on P2M1 = 0x95; // on P2M1 .n, P2M0.n = 00 ---> Standard, 01 ---> PUSH-pull 
+SFR P2M0 = 0x96; // = 10 ---> Pure the INPUT,. 11 ---> Open Drain 
+SFR CLK_DIV = 0x97; 
+PCON2 = 0x97 SFR; 
+
+SFR Special Function Register SCON = 0x98; 
+SFR SBUF = 0x99; 
+SFR S2CON = 0x9A; // 
+SFR S2BUF = 0x9B; // 
+SFR P1ASF = 0x9D; // write-only, analog input (AD or LVD) Select 
+
+sfr P2 = 0xA0; 
+SFR BUS_SPEED = 0xA1; 
+SFR in the AUXR1 = 0xA2; 
+SFR P_SW1 = 0xA2; 
+
+SFR the IE = 0xA8; 
+SFR the SADDR = 0xA9; 
+SFR WKTCL = 0xAA; // wake-up timer low byte 
+sfr WKTCH = 0xAB; // wake-up timer high byte 
+SFR S3CON = 0xAC; 
+SFR S3BUF = 0xAD; 
+SFR IE2 = 0xAF; // STC12C5A60S2 series 
+
+SFR P3 = 0xB0; 
+SFR P3m1 = 0xB1; //P3M1.n,P3M0.n = 00 ---> Standard, 01 ---> PUSH-pull 
+SFR P3M0 = 0xB2; // = 10 ---> Pure the INPUT,. 11 ---> Open Drain 
+SFR P4M1 = 0xB3; //P4M1.n,P4M0.n = 00 ---> Standard, 01 ---> PUSH-pull 
+SFR P4M0 = 0xB4; // = 10 ---> Pure the INPUT,. 11 ---> Open Drain 
+SFR IP2 = 0xB5; // STC12C5A60S2 series 
+sfr IPH2 = 0xB6; // STC12C5A60S2 series 
+SFR IPH = 0xB7; 
+
+SFR the IP = 0xB8; 
+SFR, SADEN = 0xB9; 
+SFR P_SW2 = 0xBA; 
+SFR ADC_CONTR = 0xBC; // with AD series 
+sfr ADC_RES = 0xBD; // with AD series 
+sfr ADC_RESL = 0xBE; // with AD series 
+
+SFR P4 = 0xC0; 
+SFR WDT_CONTR = 0xC1; 
+SFR IAP_DATA = 0xC2; 
+SFR IAP_ADDRH = 0xC3; 
+SFR IAP_ADDRL = 0xC4; 
+SFR IAP_CMD = 0xC5; 
+SFR IAP_TRIG = 0xC6; 
+SFR IAP_CONTR = 0xC7; 
+
+SFR ISP_DATA = 0xC2; 
+SFR ISP_ADDRH = 0xC3 ; 
+SFR ISP_ADDRL = 0xC4; 
+SFR ISP_CMD = 0xC5; 
+SFR ISP_TRIG = 0xC6; 
+SFR ISP_CONTR = 0xC7; 
+
+SFR P5 = 0xC8; // 
+SFR P5M1 = 0xC9; // P5M1.n, P5M0.n = 00 ---> Standard, --- 01> PUSH-pull 
+SFR P5M0 = 0xCA; // = 10 ---> Pure the INPUT,. 11 ---> Open Drain 
+SFR P6M1 = 0xCB; // P5M1.n, P5M0.n 00 --- = > Standard, 01 ---> PUSH-pull 
+SFR P6M0 = 0xCC; // = 10 ---> Pure the INPUT,. 11 ---> Open Drain 
+SFR SPSTAT = 0xCD; // 
+SFR the SPCTL = 0xCE; // 
+SFR the SPDAT 0xCF =; // 
+
+SFR the PSW = 0xD0; 
+SFR T4T3M = 0xD1; 
+SFR T4H = 0xD2; 
+SFR T4L = 0xD3; 
+SFR T3H = 0xD4; 
+SFR T3L = 0xD5; 
+SFR T2H = 0xD6; 
+SFR T2L = 0xD7; 
+
+SFR TH4 = 0xD2; 
+SFR TL4 = 0xD3; 
+SFR TH3 = 0xD4; 
+SFR TL3 = 0xD5; 
+SFR TH2 = 0xD6; 
+SFR TL2 = 0xD7; 
+
+SFR RL_T4H = 0xD2; 
+SFR RL_T4L = 0xD3; 
+SFR RL_T3H = 0xD4; 
+SFR RL_T3L = 0xD5; 
+SFR RL_T2H = 0xD6; 
+RL_T2L = 0xD7 SFR; 
+
+SFR in the CCON = 0xD8; // 
+SFR CMOD = 0xD9; // 
+SFR CCAPM0 = 0xDA; // the PCA module 0 mode register. 
+sfr CCAPM1 = 0xDB; // PCA Module 1 mode register. 
+sfr CCAPM2 = 0xDC; // PCA Module 2 mode register. 
+
+= 0xE0 the ACC SFR; 
+SFR P7M1 = 0xE1; 
+SFR P7M0 = 0xE2; 
+SFR CMPCR1 = 0xE6; 
+SFR CMPCR2 = 0xE7; 
+
+
+SFR P6 = 0xE8; 
+SFR CL = 0xE9; // 
+SFR CCAP0L = 0xEA; // capture the PCA module 0 / compare register low 8. 
+sfr CCAP1L = 0xEB; // PCA module capture / compare registers 1, lower 8 bits. 
+sfr CCAP2L = 0xEC; // PCA Module 2 Capture / compare register low 8. 
+
+B = 0xF0 SFR; 
+SFR PCA_PWM0 = 0xF2; // the PCA module 0 PWM register. 
+sfr PCA_PWM1 = 0xF3; // PCA module 1 PWM register. 
+sfr PCA_PWM2 = 0xF4; // PCA module 2 PWM register. 
+
+P7 = 0xF8 SFR; 
+SFR CH = 0xF9; 
+SFR CCAP0H = 0xFA; // the PCA module 0 capture / compare register high eight. 
+sfr CCAP1H = 0xFB; // PCA Module 1 Capture / compare register high eight. 
+sfr CCAP2H = 0xFC; // PCA Module 2 Capture / compare register high eight. 
+
+
+/* Of BIT Registers */ 
+/* the PSW */ 
+sbit CY = the PSW ^. 7; 
+sbit the AC = the PSW ^. 6; 
+sbit F0 = the PSW ^ 5; 
+sbit RSl = the PSW ^ 4; 
+sbit RS0 = the PSW ^ 3; 
+sbit the OV = the PSW 2 ^; 
+sbit the PSW the F1 = ^ 1; 
+sbit the PSW ^ P = 0; 
+
+/*  the TCON */ 
+sbit the TCON TF1 = ^. 7; // timer 1 overflow interrupt flag bit 
+sbit TR1 = TCON ^ 6; // timer 1 run control bit 
+sbit TF0 = TCON ^ 5; // timer 0 overflow interrupt flag 
+sbit TR0 = TCON ^ 4; // timer 0 run control bit 
+sbit IE1 = TCON ^ 3; // external interrupt 1 flag 
+sbit IT1 = TCON ^ 2; // external interrupt 1 control signaling bits, 1: falling edge interrupt, 0: The rise and fall were interrupted. 
+sbit IE0 = TCON ^ 1; // external interrupt 0 flag 
+sbit IT0 = TCON ^ 0; // external interrupt 0 control signaling bits, 1: falling edge interrupt, 0: The rise and fall were interrupted. 
+
+/* P0 */ 
+sbit the P00 = P0 ^ 0; 
+sbit P01 = P0 ^ 1; 
+sbit P02 = P0 ^ 2; 
+sbit P03 = P0 ^ 3; 
+sbit P04 = P0 ^ 4; 
+sbit P05 = P0 ^ 5; 
+sbit P06 = P0 ^. 6; 
+sbit P07 = P0 ^. 7; 
+
+/* P1 */ 
+sbit P10 = P1 ^ 0; 
+sbit P11 = P1 ^ 1; 
+sbit P12 = P1 ^ 2; 
+sbit P13 = P1 ^ 3; 
+sbit P14 = P1 ^ 4 ; 
+sbit P15 = P1 ^ 5; 
+sbit of P16 = P1 ^. 6; 
+sbit P17 = P1 ^. 7; 
+
+sbit the RXD2 = P1 ^ 0; 
+sbit TXD2 = P1 ^ 1; 
+sbit the CCP1 = P1 ^ 0; 
+sbit the CCP0 = P1 ^ 1; 
+sbit SPI_SS = P1 ^ 2; 
+sbit SPI_MOSI = P1 ^ 3; 
+sbit SPI_MISO = P1 ^ 4; 
+sbit SPI_SCLK = P1 ^ 5; 
+
+/* the P2 */ 
+sbit P20 = the P2 ^ 0; 
+sbit of P21 = the P2 ^ 1; 
+sbit P22 = the P2 ^ 2; 
+sbit P23 = the P2 ^ 3; 
+sbit P24 = the P2 ^ 4; 
+sbit P25 = the P2 ^ 5; 
+sbit P26 = the P2 ^. 6; 
+sbit of P27 = the P2 ^. 7; 
+
+/* P3 */ 
+sbit P30 = P3 ^ 0 ; 
+sbit P31 = P3 ^ 1; 
+sbit P32 = P3 ^ 2; 
+sbit P33 = P3 ^ 3; 
+sbit P34 = P3 ^ 4; 
+sbit P35 = P3 ^ 5; 
+sbit P36 = P3 ^. 6; 
+sbit P37 = P3 ^. 7; 
+
+sbit the RXD = P3 ^ 0; 
+sbit the TXD = P3 ^ 1; 
+sbit the INT0 = P3 ^ 2; 
+sbit the INT1 = P3 ^ 3; 
+sbit T0 = P3 ^ 4; 
+sbit T1 = P3 ^ 5; 
+sbit WR = P3 ^. 6; 
+sbit the RD = P3 ^. 7; 
+sbit the CCP2 = P3 ^. 7; 
+
+sbit CLKOUT0 = P3 ^ 5; 
+sbit CLKOUT1 = P3 ^ 4; 
+
+/* P4 */ 
+sbit P40 = P4 ^ 0; 
+sbit P41 = P4 ^ 1; 
+sbit P42 = P4 ^ 2; 
+sbit P43 = P4 ^ 3; 
+sbit P44 = P4 ^ 4; 
+sbit P45 = P4 ^ 5; 
+sbit P46 = P4 ^. 6; 
+sbit P47 = P4 ^. 7; 
+
+/ * P5 * / 
+sbit P50 = P5 ^ 0; 
+sbit P51 = P5 ^ 1; 
+sbit P52 = P5 ^ 2; 
+sbit of P53 = P5 ^ 3; 
+sbit P54 = P5 ^ 4; 
+sbit P55 = P5 ^ 5; 
+sbit P56 = P5 ^. 6; 
+sbit P57 = P5 ^. 7; 
+
+/* Special Function Register SCON * */ 
+sbit Special Function Register SCON SM0 = ^. 7; // SM0 / FE SM0 SM1 = 00 ~. 11: 3 ~ way 0 
+sbit SM1 = ^ Special Function Register SCON. 6; // 
+sbit Special Function Register SCON SM2 = ^ 5; // multi-machine communication 
+sbit REN = SCON ^ 4; // Receive Enable 
+sbit TB8 = SCON ^ 3; // send data Article 8 
+sbit RB8 = SCON ^ 2; // receive data Article 8 
+sbit TI = SCON ^ 1; // transmit interrupt flag bit 
+sbit RI = SCON ^ 0; // receive interrupt flag 
+
+/* * the IE */ 
+sbit the EA the IE = ^. 7; // interrupt disable bit 
+sbit ELVD = IE ^ 6; // low voltage monitor interrupt enable bit 
+sbit EADC = IE ^ 5; // ADC interrupt enable bit 
+sbit ES = IE ^ 4; // serial interrupt enable control bit 
+sbit ET1 = IE ^ 3; // timer 1 interrupt enable control bit 
+sbit EX1 = IE ^ 2; // external interrupts 1 enable control bits 
+sbit ET0 = IE ^ 1; // timer 0 interrupt enable control bit 
+sbit EX0 = IE ^ 0; // external interrupt 0 Enable control bits 
+
+
+/ * the IP * / 
+/ * 
+sbit PPCA the IP = ^. 7; // PCA interrupt priority setting bit 
+sbit PLVD = IP ^ 6; // low voltage interrupt priority setting bit 
+sbit PADC = IP ^ 5; // ADC interrupt priority setting bit 
+sbit PS = IP ^ 4; // serial interrupt 0 priority setting bit 
+sbit PT1 = IP ^ 3; // timer interrupt 1 priority setting bit 
+sbit PX1 = IP ^ 2; // external interrupt 1 priority setting bit 
+sbit PT0 = IP ^ 1; // timer 0 interrupt priority setting bit 
+sbit PX0 = IP ^ 0; // external interrupt 0 priority setting bits 
+* / 
+
+sbit ACC0 the ACC ^ = 0; 
+sbit the ACC ACC1 = ^ 1; 
+sbit the ACC the ACC2 = ^ 2; 
+sbit ACC3 = the ACC ^ 3; 
+sbit ACC4 = the ACC ^ 4; 
+sbit ACC5 = the ACC ^ 5; 
+sbit ACC6 = the ACC ^. 6; 
+sbit ACC7 = the ACC ^. 7; 
+
+sbit B0 = B ^ 0; 
+sbit B1 = B ^ 1; 
+sbit B2 = 2 ^ B; 
+sbit B3 = B ^ 3; 
+sbit B4 = B ^ 4; 
+sbit B5 = B ^ 5; 
+sbit B6 B = ^. 6; 
+sbit of B7 = B ^. 7; 
+
+
+//. 7. 6 5 4 3 2 1 0 the Reset the Value 
+// SFR IE2 = 0xAF; - - - - - - Auxiliary interrupt the ESPI the ES2 0000,0000B //    
+#define SPI_INT_ENABLE () IE2 | = 2 // allow SPI interrupt 
+#define SPI_INT_DISABLE () IE2 & = ~ 2 // allow SPI interrupt 
+#define UART2_INT_ENABLE () IE2 | = 1 // 2 allows serial interrupt 
+#define UART2_INT_DISABLE () IE2 & = ~ 1 // 2 to allow serial interrupts 
+
+//. 7. 6 5 4 3 2 1 0 the Reset the Value 
+// the IP SFR = 0xB8; // interrupt priority low PADC the PLVD is the PS PT1 PX1 PPCA PT0 PX0 0000,0000 
+// -------- 
+sbit PPCA the IP = ^. 7; // the PCA module interrupt priority 
+sbit PLVD = IP ^ 6; // low voltage monitoring interrupt priority 
+sbit PADC = IP ^ 5; // ADC interrupt priority 
+sbit PS = IP ^ 4; // serial interrupt 0 priority setting bit 
+sbit PT1 = IP ^ 3; // timer interrupt 1 priority setting bit 
+sbit PX1 = IP ^ 2; // external interrupt 1 priority setting bit 
+sbit PT0 = IP ^ 1; // timer 0 interrupt priority setting bit 
+sbit PX0 = IP ^ 0; // external interrupt priority setting bit 0 
+
+//. 7. 6 5 4 3 2 1 0 the Reset the Value 
+// IPH = SFR 0xB7; // interrupt priority high PLVDH PADCH PSH PT1H PX1H PPCAH PT0H PX0H 0000,0000 
+// SFR IP2 = 0xB5; / / - - - - - - PSPI PS2 XXXX, xx00 
+// SFR IPH2 = 0xB6; // - - - - - - PSPIH PS2H XXXX, xx00 
+#define PPCAH 0x80 
+#define PLVDH 0x40 
+#define PADCH 0x20 
+#define PSH 0x10 
+#define 0x08 PT1H 
+#define PX1H 0x04 
+#define PT0H 0x02 
+#define PX0H 0x01 
+
+#define PCA_InterruptFirst () PPCA = 1 
+#define LVD_InterruptFirst () the PLVD is = 1 
+#define ADC_InterruptFirst () PADC = 1 
+#define UART1_InterruptFirst () the PS = 1 
+#define Timer1_InterruptFirst ( ) PT1 = 1 
+#define INT1_InterruptFirst () PX1 = 1 
+#define Timer0_InterruptFirst () PT0 = 1 
+#define INT0_InterruptFirst () PX0 = 1 
+
+
+/ ********************* ************************************************** ************************** / 
+
+
+
+/ ********************************************************** ************************************************** ************************************************************ / 
+#define S1_DoubleRate () the PCON | = 0x80 
+#define S1_SHIFT () Special Function Register SCON & = 0x3f 
+#define S1_8bit () Special Function Register SCON = (Special Function Register SCON & 0x3f) | 0x40 
+#define S1_9bit () Special Function Register SCON = (Special Function Register SCON & 0x3f) | 0xC0 
+#define S1_RX_Enable () Special Function Register SCON | = 0x10 
+#define S1_USE_P30P31 () P_SW1 & = ~ 0xC0 // use the UART1 P30 P31 port default 
+# define S1_USE_P36P37 () P_SW1 = (P_SW1 & ~ 0xc0) | 0x40 // UART1 using P36 P37 port 
+#define S1_USE_P16P17 () P_SW1 = (P_SW1 & ~ 0xc0) | 0x80 // UART1 using P16 P17 port 
+#define S1_TXD_RXD_SHORT () PCON2 | = (1 << 4) // the TXD and RXD connection relay output 
+#define S1_TXD_RXD_OPEN () PCON2 & = ~ (1 << 4) // the TXD and RXD connections disconnect relay default 
+#define S1_BRT_UseTimer2 () AUXR | = 1 
+#define S1_BRT_UseTimer1 () AUXR & = ~ 1 
+
+//. 7. 6 5 4 3 2 1 0 the Reset the Value 
+// SFR S2CON = 0x9A; S2SM0 - S2SM2 S2REN S2TB8 S2RB8 S2TI S2RI 00000000B S2 Control // 
+
+#define S2_8bit () S2CON & = ~ (1 << 7 ) // 0,8-bit serial mode 2 UART, baud rate = timer 2 overflow rate / 4 
+#define S2_9bit () S2CON | = (1 <<. 7) // serial 1,9 2 mode bit UART, baud rate = timer 2 overflow rate / 4 
+#define S2_RX_Enable () S2CON | = (1 << 4) // string allows 2 receives 
+
+#define S2_MODE0 () S2CON & = ~ ( 1 << 7) // 0,8 bit serial mode 2 UART, baud rate = timer 2 overflow rate / 4 
+#define S2_MODE1 () S2CON | = (1 << 7) // 2 serial mode 1,9 bit UART, baud rate = timer 2 overflow rate / 4 
+#define S2_RX_EN () S2CON | = (1 << 4) // string allows 2 receives 
+#define S2_RX_Disable () S2CON & = ~ (1 << 4) // Disable string received 2 
+#define TI2 (S2CON & 2) = 0! 
+#define RI2 (S2CON & 1) = 0! 
+#define SET_TI2 () S2CON | = 2 
+#define CLR_TI2 () S2CON & = ~ 2 
+#define CLR_RI2 () S2CON & = ~ 1 
+#define S2TB8_SET () S2CON | =. 8 
+#define S2TB8_CLR () S2CON & = ~. 8 
+#define S2_Int_en () IE2 | = 1 // 2 serial ports allow interrupt 
+#define S2_USE_P10P11 () P_SW2 & = ~ 1 // UART2 using P1 port default 
+#define S2_USE_P46P47 () P_SW2 | = 1 // UART2 using the P4 port 
+
+#define S3_USE_P00P01 () P_SW2 & = ~ 2 // UART3 use the P0 port default 
+#define S3_USE_P50P51 () P_SW2 | = 2 / / UART3 use P5 port 
+#define S4_USE_P02P03 () P_SW2 & = ~ 4 // UART4 use the P0 port default 
+#define S4_USE_P52P53 () P_SW2 | = 4 // UART4 use of P5 
+
+
+/ ************ ********************************************** / 
+
+#define Timer0_16bitAutoReload () TMOD & = ~ 0x03 // 16 -bit auto-reload 
+#define Timer0_16bit () TMOD = (TMOD & ~ 0x03) | 0x01 // 16 Wei 
+#define Timer0_8bitAutoReload () TMOD = (TMOD & ~ 0x03) | 0x02 // 8-bit auto reload 
+#define Timer0_16bitAutoRL_NoMask () TMOD | = 0x03 // 16 -bit auto-reload NMI 
+#define Timer0_AsCounterP32 () TMOD | = 4 // 0 is used as a counter 
+#define Timer0_AsTimer () TMOD & = ~ 4 // 0 is used as a timer 
+#define Timer0_ExtControlP34 () TMOD | = 0 4 // allowable timing by the external INT0 high count 
+#define Timer0_Run () TR0 = 1 // allow the timer 0 count 
+#define Timer0_Stop () TR0 = 0 // disable timer 0 counting 
+#define Timer0_InterruptEnable () ET0 = 1 // Enable Timer1 interrupt. 
+#define Timer0_InterruptDisable () ET0 = 0 // Disables the Timer1 interrupt. 
+
+#define Timer1_16bitAutoReload () the TMOD & = ~ 0x30 // 16-bit auto-reload 
+#define Timer1_16bit () TMOD = (TMOD & ~ 0x30) | 0x10 // 16 Wei 
+#define Timer1_8bitAutoReload () TMOD = (TMOD & ~ 0x30) | 0x20 // 8 -bit auto-reload 
+# define Timer1_16bitAutoRL_NoMask () TMOD | = 0x30 // 16 -bit auto-reload NMI 
+#define Timer1_AsCounterP33 () TMOD | = ( 1 << 6) // 1 when used as counter 
+#define Timer1_AsTimer () TMOD & = ~ ( 1 << 6) // 1 when used as a timer 
+#define Timer1_ExtControlP35 () TMOD | = ( 1 << 7) // 1 when the timer count allows external INT1 high 
+#define Timer1_Run () TR1 = 1 // allow the timer count 1 
+#define Timer1_Stop () TR1 = 0 // disable timer 1 count 
+#define Timer1_InterruptEnable () ET1 = 1 // Enable Timer1 interrupt. 
+#define Timer1_InterruptDisable () ET1 = 0 // Disables the Timer1 interrupt. 
+
+
+. 7. 6 5 4 3 // 2 1 0 the Reset the Value 
+// SFR AUXR = 0x8E; T0X12 T1X12 UART_M0x6 T2_C T2R / T Auxiliary T2X12 the EXTRAM S1ST2 the Register 0000,0000 // 
+
+#define Timer0_1T () AUXR | = (1 <<. 7) the Timer0 clodk FO = // 
+#define Timer0_12T () AUXR & = ~ (1 <<. 7) // = the Timer0 clodk FO / 12 12 division, default 
+#define Timer1_1T () AUXR | = (1 <<. 6) // FO = clodk the Timer1 
+#define Timer1_12T () AUXR & = ~ (1 <<. 6) // = the Timer1 clodk FO / 12 12 division, default 
+#define S1_M0x6 () AUXR | = (1 << 5) // the UART Mode0 Standard IS 6X Speed 
+​​#define S1_M0x1 () AUXR & = ~ (1 << 5) // default, the UART Mode0 Speed ​​IS Standard 
+#define Timer2_Run () AUXR | = (1 << 4) // timer 2 count 
+# define Timer2_Stop () AUXR & = ~ (1 << 4) // disable the timer 2 count 
+#define Timer2_AsCounterP31 () AUXR | = ( 1 << 3) // 2 when used as counter 
+#define Timer2_AsTimer () AUXR & = ~ (1 << 3) // 2 when used as a timer 
+#define Timer2_1T () AUXR | = (1 << 2) // the Timer0 clodk = FO 
+#define Timer2_12T () AUXR & = ~ (1 << 2) // Timer0 clodk = fo / 12 12 division, default 
+#define Timer2_InterruptEnable () IE2 | = (1 << 2) // allows Timer2 interrupts. 
+#define Timer2_InterruptDisable () IE2 & = ~ (1 << 2) // Disable Timer2 interrupts. 
+
+#define ExternalRAM_enable () AUXR | = 2 // allow external XRAM, prohibiting internal use 1024RAM 
+#define InternalRAM_enable () AUXR & = ~ 2 // Disable external XRAM, allows the use of internal 1024RAM 
+
+#define T0_pulseP34_enable () AUXR2 | = 1 // allow overflow pulse T0 (P3.5) pin output at T0, Fck0 = 1/2 T0 overflow rate, T0 can 1T or 12T. 
+T0_pulseP34_disable #define () in AUXR2 & = ~ 1 
+#define T1_pulseP35_enable () in AUXR2 | = 2 // allow T1 overflow pulses T1 (P3.4) pin output, Fck1 = 1/2 T1 overflow rate, T1 can 1T or 12T. 
+T1_pulseP35_disable #define () in AUXR2 & = ~ 2 
+#define T2_pulseP30_enable () in AUXR2 | = 4 // allow T2 overflow pulses T1 (P3.0) pin output, Fck2 = 1/2 T2 overflow rate, T2 can 1T or 12T. 
+T2_pulseP30_disable #define () in AUXR2 & = ~ 4 
+
+#define T0_pulseP35 (N) ET0 = 0, Timer0_AsTimer (), Timer0_1T (), Timer0_16bitAutoReload (), TH0 = (65536 - (N / 2 + MAIN_Fosc / 2) / (N) ) / 256, TL0 = (65536- (n / 2 + MAIN_Fosc / 2) / (n))% 256, AUXR2 | = bit0, TR0 = 1 // fx = fosc / (2 * M) / n, M = 12 or the M = 1 
+#define T1_pulseP34 (N) = 0 the ET1, Timer1_AsTimer (), Timer1_1T (), Timer1_16bitAutoReload (), of TH1 = (65536- (N / 2 + MAIN_Fosc / 2) / (N)) / 256, the TL1 = (65536- (n / 2 + MAIN_Fosc / 2) / (n))% 256, AUXR2 | = bit1, TR1 = 1 // fx = fosc / (2 * M) / n, M = 1 or M = 12 
+#define T2_pulseP30 (n) Timer2_InterruptDisable () , Timer2_AsTimer (), Timer2_1T (), TH2 = (65536- (n / 2 + MAIN_Fosc / 2) / (n)) / 256, TL2 = (65536- (n / 2 + MAIN_Fosc / 2) / (N)) 256%, in AUXR2 | = bit2, Timer2_Run () // FX = FOSC / (2 * M) / N, M = 1 or M = 12 
+
+#define Timer0_Load (N) TH0 = ( N) / 256, TL0 is = (N) 256% 
+#define Timer1_Load (N) of TH1 = (N) / 256, the TL1 = (N) 256% 
+#define Timer2_Load (N) of TH2 = (N) / 256, the TL2 = ( N)% 256 
+
+#define Timer0_Load_us (N) TH0 = (65536-MainFosc_KHZ * (N) / 1000) / 256, TL0 = (65536-MainFosc_KHZ * (N) / 1000)% 256 
+#define Timer1_Load_us (N) of TH1 = ( * MainFosc_KHZ-65536 (N) / 1000) / 256, TL1 = (65536-MainFosc_KHZ * (N) / 1000)% 256 
+#define Timer2_Load_us (N) TH2 = (65536-MainFosc_KHZ * (N) / 1000) / 256, = TL2 (65536-MainFosc_KHZ * (N) / 1000)% 256 
+
+
+// SFR WDT_CONTR = 0xC1; // the Watch-Dog-the Timer Control Register 
+//. 7. 6 5 4 3 2 1 0 the Reset the Value 
+// WDT_FLAG - EN_WDT CLR_WDT IDLE_WDT xx00,0000 PS0 PS1 PS2 
+#define D_WDT_FLAG (1 <<. 7) 
+#define D_EN_WDT (1 << 5) 
+#define D_CLR_WDT (1 << 4) the Clear Auto // 
+#define D_IDLE_WDT (1 << 3) // the WDT counter the Idle the when 
+#define D_WDT_SCALE_2 0 
+#define D_WDT_SCALE_4 1 
+#define D_WDT_SCALE_8 2 // 393216 * T = N / FO 
+#define D_WDT_SCALE_16 3 
+#define D_WDT_SCALE_32 4 
+#define D_WDT_SCALE_64 5 
+#define D_WDT_SCALE_128. 6 
+#define D_WDT_SCALE_256. 7 
+
+#define WDT_reset (N) WDT_CONTR = D_EN_WDT + D_CLR_WDT + D_IDLE_WDT + ( n) // initialize the WDT, the dogs 
+
+
+//. 7. 6 5 4 3 2 1 0 the Reset the Value 
+// the PCON SFR = 0x87; in the SMOD SMOD0 LVDF POF GF1 GF0 the PD the IDL 0001,0000 // the Power Control 
+// // in the SMOD double-speed serial 
+// SMOD0 
+#define LVDF (1 << 5) //P4.6 low voltage detection flag 
+// POF 
+// GF1 
+// GF0 
+// DEFINE D_PD # 2 // SET 1, Power mODE Down 
+// DEFINE D_IDLE # 1 // 1 SET, IDLE mODE 
+#define MCU_IDLE () the PCON | = 1 // the MCU enters IDLE mode 
+#define MCU_POWER_DOWN () PCON | = 2 // MCU enters sleep mode 
+
+
+// sfr ISP_CMD = 0xC5; 
+#define ISP_STANDBY () = 0 // ISP_CMD the ISP idle command (prohibition) 
+#define ISP_READ () = 1 // ISP_CMD the ISP read command 
+#define ISP_WRITE () ISP_CMD = 2 // ISP write command 
+#define ISP_ERASE ( ) ISP_CMD = 3 // ISP erase command 
+
+// SFR ISP_TRIG = 0xC6; 
+#define ISP_TRIG () ISP_TRIG = 0x5A, ISP_TRIG = 0xA5 // trigger the ISP command 
+
+//. 7. 6 5 4 3 2 1 0 the Reset the Value 
+// SFR IAP_CONTR 0xC7 =; IAPEN SWBS SWRST CFAIL - a WT1 WT2 the WT0 0000, the IAP Control the Register X000 // 
+#define ISP_EN (1 <<. 7) 
+#define ISP_SWBS (1 <<. 6) 
+#define ISP_SWRST (1 << 5) 
+#define ISP_CMD_FAIL ( 4 << 1) 
+#define ISP_WAIT_1MHZ. 7 
+#define ISP_WAIT_2MHZ. 6 
+#define ISP_WAIT_3MHZ 5 
+#define ISP_WAIT_6MHZ 4 
+#define ISP_WAIT_12MHZ 3 
+#define ISP_WAIT_20MHZ 2 
+#define ISP_WAIT_24MHZ 1 
+#define ISP_WAIT_30MHZ 0 
+
+
+
+
+
+/ * the Register the ADC * / 
+//. 7. 6 5 4 3 the Reset the Value 1 0 2 
+// SFR ADC_CONTR = 0xBC; ADC_POWER SPEED1 SPEED0 ADC_FLAG ADC_START CHS2 CHS1 CHS0 0000,0000 the AD converter control register // 
+// sfr ADC_RES = 0xBD; ADCV.9 ADCV.8 ADCV.7 ADCV.6 ADCV. 5 ADCV.4 ADCV.3 ADCV.2 0000,0000 // A / D conversion result high 8 
+// sfr ADC_RESL = 0xBE; ADCV.1 ADCV.0 0000,0000 // A / D conversion result low 2 
+/ / sfr ADC_CONTR = 0xBC; // directly MOV operation, do not use with or 
+
+
+// sfr SPCTL = 0xCE; SPI control register 
+//. 7. 6 5 4 3 2 1 0 the Reset the Value 
+// SSIG the SPEN CPOL CPHA DORD MSTR SPR1 SPR0 0x00 
+
+#define SPI_SSIG_None () SPCTL | = ( 1 << 7) // 1: ignore SS pin 
+#define SPI_SSIG_Enable () SPCTL & = ~ (1 << 7) // 0: SS pin is used to determine the master and slave 
+#define SPI_Enable () SPCTL | = (1 << 6) // 1: allow the SPI 
+#define SPI_DISABLE () the SPCTL & = ~ (1 <<. 6) // 0: ban the SPI 
+#define SPI_LSB_First () the SPCTL | = (1 < <5) // 1: LSB first mover 
+#define SPI_MSB_First () SPCTL & = ~ (1 << 5) // 0: MSB starting 
+#define SPI_Master () SPCTL | = ( 1 << 4) // 1: set host 
+#define SPI_Slave () SPCTL & = ~ (1 << 4) // 0: as slave 
+#define SPI_SCLK_NormalH () SPCTL | = ( 1 << 3) // 1: idle SCLK is high Ping 
+#define SPI_SCLK_NormalL () SPCTL & = ~ (1 << 3) // 0: idle SCLK low 
+#define SPI_PhaseH () the SPCTL | = (1 << 2) // 1: 
+#define SPI_PhaseL () & = ~ the SPCTL (1 << 2) // 0: 
+#define SPI_Speed ​​(N) = the SPCTL (the SPCTL & ~ 3) | (N) // set the speed, 0 - fosc / 4, 1 - fosc / 16 , 2 - FOSC / 64-, 3 - FOSC / 128 
+
+// SFR the SPDAT = 0xCF; // the SPI the register the Data 0000,0000 
+// SFR SPSTAT = 0xCD; the SPI status register // 
+// 7654321 the Reset the Value 0 
+// the SPIF WCOL - - - - - - 
+#define the SPIF 0x80 // the SPI transfer completion flag. Writing 1 cleared. 
+#define WCOL 0x40 // SPI Write Collision Flag. Writing 1 cleared. 
+
+#define SPI_USE_P12P13P14P15 () AUXR1 & = ~ 0x0c // SPI will switch to the P12 (SS) P13 (MOSI) P14 (MISO) P15 (SCLK) ( power-on default). 
+#define SPI_USE_P24P23P22P21 () AUXR1 = (AUXR1 & ~ 0x0c) | 0x04 // SPI will switch to the P24 (SS) P23 (MOSI) P22 (MISO) P21 (SCLK). 
+#define SPI_USE_P54P40P41P43 () AUXR1 = (AUXR1 & ~ 0x0c) | 0x08 // SPI will switch to the P54 (SS) P40 (MOSI) P41 (MISO) P43 (SCLK). 
+
+
+/ * 
+; PCA_PWMn:. 7. 6 5 4 3 2 1 0 
+; EBSn_1 EBSn_0 - - - - EPCnH EPCnL 
+; B2-B5: Reserved 
+; B1 (EPCnH): In PWM mode, the composition and CCAPnH 9 digits. 
+; B0 (EPCnL): In PWM mode, the composition and CCAPnL 9 digits. 
+* / 
+#define PWM0_NORMAL () PCA_PWM0 & = ~ 3 // the PWM0 output normal (default) 
+#define PWM0_OUT_0 () PCA_PWM0 | = 3 // output has been the PWM0 0 
+#define PWM0_OUT_1 () PCA_PWM0 & = ~ 3, CCAP0H = 0 / / PWM0 output has been 1 
+
+#define PWM1_NORMAL () PCA_PWM1 & = ~ 3 // the PWM0 output normal (default) 
+#define PWM1_OUT_0 () PCA_PWM1 | = 3 // output has been the PWM0 0 
+#define PWM1_OUT_1 () PCA_PWM1 & = ~ 3, CCAP1H = 0 // PWM1 output has been 1 
+
+#define PWM2_NORMAL () PCA_PWM2 & = ~ 3 // the PWM1 normal output (default) 
+#define PWM2_OUT_0 () PCA_PWM2 | = 3 // has the PWM2 output 0 
+#define PWM2_OUT_1 () PCA_PWM2 & = ~ 3, CCAP2H = 0 // PWM2 output has been 1 
+
+
+//. 7. 6 5 4 3 2 1 0 the Reset the Value 
+// SFR in the CCON = 0xD8; the CF the CR - - - CCF2 CCF1 CCF0 00xx, xx00 // the PCA control register. 
+sbit CCF0 = CCON ^ 0; // PCA Module 0 interrupt flag, set by hardware and must be cleared by software. 
+sbit CCF1 = CCON ^ 1; // PCA module interrupt flag is set by hardware and must be cleared by software. 
+sbit CCF2 = CCON ^ 2; // PCA Module 2 interrupt flag, set by hardware and must be cleared by software. 
+sbit CR = CCON ^ 6; // 1: PCA Counter count, must be cleared by software. 
+sbit CF = CCON ^ 7; // PCA counter overflows (CH, CL changes from FFFFH to 0000H) mark. After the PCA counter overflow set by hardware and must be cleared by software. 
+
+. 7. 6 5 4 3 // 2 1 0 the Reset the Value 
+// SFR CMOD = 0xD9; CIDL - - - CPS1 CPS2 CPS0 0xxx ECF, 0000 // the PCA mode register. 
+#define PCA_IDLE_OFF () CMOD | = ( 1 << 7) // IDLE state PCA stop counting. 
+#define PCA_IDLE_ON () CMOD & = ~ (1 << 7) // IDLE state PCA continues counting. 
+#define PCA_CLK_12T () CMOD & = ~ 0x0E // PCA Count Pulse Select external crystal / 12. FOSC / 12 
+#define PCA_CLK_2T () CMOD = (CMOD & ~ 0x0E) + 2 // the PCA Count Pulse Select external crystal / 2. FOSC / 2 
+#define PCA_CLK_T0 () CMOD = (CMOD & ~ 0x0E) + 4 // the PCA Count Pulse Select Timer0 interrupt, Timer0 by AUXR register set to work in 12T or 1T mode. 
+#define PCA_CLK_ECI () CMOD = (CMOD & ~ 0x0E) + 6 // PCA Count Pulse Select the external clock from the ECI / P3.4 pin input, the maximum fosc / 2. 
+#define PCA_CLK_1T () CMOD = (CMOD & ~ 0x0E) + 8 // PCA Count Pulse Select external crystal. FOSC / 1 
+#define PCA_CLK_4T () CMOD = (CMOD & ~ 0x0E) + 10 // the PCA Count Pulse Select external crystal / 4. FOSC / 4 
+#define PCA_CLK_6T () CMOD = (CMOD & ~ 0x0E) + 12 // the PCA Count Pulse Select external crystal / 6. FOSC /. 6 
+#define PCA_CLK_8T () CMOD = (CMOD & ~ 0x0E) + 14 // the PCA Count Pulse Select external crystal / 8. FOSC /. 8 
+#define PCA_INT_ENABLE () CMOD | = 1 // the PCA counter overflow interrupt enable bit, 1 --- allow CF (CCON.7) generate an interrupt. 
+#define PCA_INT_DISABLE () CMOD & = ~ 1 // PCA counter overflow interrupt disabled. 
+
+. 7. 6 5 4 3 // 2 1 0 the Reset the Value 
+// SFR in the AUXR1 = 0xA2; S1_S1 S1_S0 CCP_S1 CCP_S0 SPI_S1 SPI_S0 - the DPS 0100,0000 // Auxiliary the Register 1 
+
+#define PCA_USE_P12P11P10P37 () in the AUXR1 & = ~ 0x30 // The PCA / PWM switching to P12 (ECI) P11 (CCP0) P10 (CCP1) P37 (CCP2) ( power-on default). 
+#define PCA_USE_P34P35P36P37 () AUXR1 = (AUXR1 & ~ 0x30) | 0x10 // The PCA / PWM switching to the P34 (ECI) P35 (CCP0) P36 (CCP1) P37 (CCP2). 
+#define PCA_USE_P24P25P26P27 () AUXR1 = (AUXR1 & ~ 0x30) | 0x20 // The PCA / PWM switching to the P24 (ECI) P25 (CCP0) P26 (CCP1) P27 (CCP2). 
+
+#define DPS_SEL1 () AUXR1 | = 1 // 1: Select DPTR1. 
+#define DPS_SEL0 () AUXR1 & = ~ 1 // 0: Select DPTR0 (power-on default). 
+
+
+/ *. 7. 6 5 4 3 2 1 0 the Reset the Value 
+// SFR CCAPM0 = 0xDA; the PWM register - ECOM0 CAPP0 CAPN0 MAT0 TOG0 PWM0 ECCF0 x000,0000 // PCA module 0 
+// SFR CCAPM1 = 0xDB; the PWM register - ECOM1 CAPP1 CAPN1 MAT1 TOG1 PWM1 ECCF1 x000,0000 // PCA module 1 
+// SFR CCAPM2 = 0xDC; the PWM register - ECOM2 CAPP2 CAPN2 MAT2 TOG2 PWM2 ECCF2 x000,0000 // PCA module 2 
+; the ECOMn = 1: enable the comparison function. 
+; CAPPn = 1: Allows rising edge capture. 
+; CAPNn = 1: Allow falling edge triggered capture function. 
+; MATn = 1: When a match occurs, allowing CCON the CCFn set. 
+; TOGn = 1: When a match occurs, CEXn will flip. (CEX0 / of the PCA0 / the PWM0 / P3.7, CEX1 / PCA1 / the PWM1 / P3.5) 
+; the PWMn = 1: The CEXn set PWM output. 
+; ECCFn = 1: Allow CCON in CCFn interrupt. 
+; The ECOMn both CAPPn CAPNn the MATn bit the TOGn the PWMn the ECCFn 
+; 0 0 0 0 0 0 0 00H any feature is not enabled. 
+; X 1 0 0 0 0 x 20H 16 Wei CEXn rising edge capture. 
+; X 0 1 0 0 0 x 10H 16 Wei CEXn falling edge triggered capture function. 
+; X 1 1 0 0 0 x 30H 16 Wei CEXn / PCAn edge (upper and lower edge) to trigger the capture function. 
+; 1 0 0 1 0 0 x 48H 16 -bit software timer. 
+; 1 0 0 1 1 0 x 4CH 16 -bit high speed pulse output. 
+; 1 0 0 0 0 1 0 42H 8 Wei PWM. Without interruption 
+; 1 1 0 0 0 1 1 63H 8 Wei PWM. Low to high can generate an interrupt 
+; 1 0 1 0 0 1 1 53H 8 Wei PWM. 
+High to low can generate an interrupt ; 1 1 1 0 0 1 1 73H 8 Wei PWM. Low to high or high to low and can generate an interrupt 
+; ************************************** ************************************************************ 
+; ******************** *********************************************** / 
+#define PCA0_none () CCAPM0 = 0 
+#define PCA0_PWM (of n bit) = 0x42 CCAPM0, PCA_PWM0 = (PCA_PWM0 & 0x0C) | ((. 8-of n bit) <<. 6) 
+#define PCA0_PWM_rise_int (of n bit) = 0x63 CCAPM0, PCA_PWM0 = (PCA_PWM0 & 0x0C ) | ((8-nbit) << 6)
+PCA0_PWM_fall_int #define (of n bit) = 0x53 CCAPM0, PCA_PWM0 = (PCA_PWM0 & 0x0C) | ((. 8-of n bit) <<. 6) 
+#define PCA0_PWM_edge_int (of n bit) = 0x73 CCAPM0, PCA_PWM0 = (PCA_PWM0 & 0x0C) | ((8- of n bit) <<. 6) 
+#define PCA0_capture_rise () CCAPM0 = (0x20 + 1) 
+#define PCA0_capture_fall () CCAPM0 = (0x10 + 1) 
+#define PCA0_capture_edge () CCAPM0 = (0x30 + 1) 
+#define PCA0_16bit_Timer () CCAPM0 = ( 1 + 0x48) 
+#define PCA0_High_Pulse () CCAPM0 = (0x4C + 1) 
+
+#define PCA1_none () CCAPM1 = 0 
+#define PCA1_PWM (of n bit) CCAPM1 = 0x42, PCA_PWM1 = (PCA_PWM1 & 0x0C) | ((. 8-of n bit) << . 6) 
+#define PCA1_PWM_rise_int (of n bit) CCAPM1 = 0x63, PCA_PWM1 = (PCA_PWM1 & 0x0C) | ((. 8-of n bit) <<. 6) 
+#define PCA1_PWM_fall_int (of n bit) CCAPM1 = 0x53, PCA_PWM1 = (PCA_PWM1 & 0x0C) | (( of n bit-. 8) <<. 6) 
+#define PCA1_PWM_edge_int (of n bit) CCAPM1 = 0x73, PCA_PWM1 = (PCA_PWM1 & 0x0C) | ((. 8-of n bit) <<. 6) 
+#define PCA1_capture_rise () CCAPM1 = (0x20 + 1) 
+#define PCA1_capture_fall () CCAPM1 = (0x10 + 1) 
+#define PCA1_capture_edge () CCAPM1 = (0x30 + 1) 
+#define PCA1_16bit_Timer () CCAPM1 = (0x48 + 1) 
+#define PCA1_High_Pulse () CCAPM1 = (0x4C + 1) 
+
+#define PCA2_none ( ) CCAPM2 = 0 
+#define PCA2_PWM (of n bit) CCAPM2 = 0x42, PCA_PWM2 = (PCA_PWM2 & 0x0C) | ((. 8-of n bit) <<. 6) 
+#define PCA2_PWM_rise_int (of n bit) CCAPM2 = 0x63, PCA_PWM2 = (PCA_PWM2 & 0x0C) | ((. 8-of n bit) <<. 6) 
+#define PCA2_PWM_fall_int (of n bit) CCAPM2 = 0x53, PCA_PWM2 = (PCA_PWM2 & 0x0C) | ((. 8-of n bit) <<. 6) 
+#define PCA2_PWM_edge_int (of n bit) CCAPM2 = 0x73, PCA_PWM2 = (PCA_PWM2 & 0x0C) | ((. 8-of n bit) <<. 6) 
+#define PCA2_capture_rise () CCAPM2 = (0x20 + 1) 
+#define PCA2_capture_fall () CCAPM2 = (0x10 + 1) 
+#define PCA2_capture_edge () CCAPM2 = (0x30 + 1) 
+#define PCA2_16bit_Timer () CCAPM2 = (0x48 + 1) 
+#define PCA2_High_Pulse () CCAPM2 = (0x4C + 1) 
+
+/ * Above the SFR or Change IS the STC Additional * / 
+
+
+
+
+/ ************ ********************************************** / 
+
+
+/ ** ************************************************** ****** / 
+#define NOP1 () _nop_ () 
+#define NOP2 () NOP1 (), NOP1 () 
+#define NOP3 () NOP2 (), NOP1 () 
+#define NOP4 () NOP3 (), NOP1 ( ) 
+#define NOP5 () NOP4 (), NOP1 () 
+#define NOP6 () NOP5 (), NOP1 () 
+#define NOP7 () NOP6 (), NOP1 () 
+#define NOP8 () NOP7 (), NOP1 () 
+# NOP9 DEFINE () NOP8 (), NOP1 () 
+#define NOP10 () NOP9 (), NOP1 () 
+#define NOP11 () NOP10 (), NOP1 () 
+#define NOP12 () NOP11 (), NOP1 () 
+#define NOP13 () NOP12 (), NOP1 () 
+#define NOP14 () NOP13 (), NOP1 () 
+#define NOP15 () NOP14 (), NOP1 () 
+#define NOP16 () NOP15 (), NOP1 () 
+#define NOP17 () NOP16 (), NOP1 () 
+#define NOP18 () NOP17 (), NOP1 () 
+#define NOP19 () NOP18 (), NOP1 () 
+#define NOP20 () NOP19 (), NOP1 () 
+#define NOP21 () NOP20 ( ), NOP1 () 
+#define NOP22 () NOP21 (), NOP1 () 
+#define NOP23 () NOP22 (), NOP1 () 
+#define NOP24 () NOP23 (), NOP1 () 
+#define NOP25 () NOP24 (), NOP1 () 
+#define NOP26 () NOP25 (), NOP1 () 
+#define NOP27 () NOP26 (), NOP1 () 
+#define NOP28 () NOP27 (), NOP1 () 
+#define NOP29 () NOP28 (), NOP1 ( ) 
+#define NOP30 () NOP29 (), NOP1 () 
+#define NOP31 () NOP30 (), NOP1 () 
+#define NOP32 () NOP31 (), NOP1 () 
+#define NOP33 () NOP32 (), NOP1 () 
+# NOP34 DEFINE () NOP33 (), NOP1 () 
+#define NOP35 () NOP34 (), NOP1 () 
+#define NOP36 () NOP35 (), NOP1 () 
+#define NOP37 () NOP36 (), NOP1 () 
+#define NOP38 () NOP37 (), NOP1 () 
+#define NOP39 () NOP38 (), NOP1 () 
+#define NOP40 () NOP39 (), NOP1 () 
+#define the NOP (N) ## N the NOP () 
+
+
+/ **** ****************************************** / 
+
+
+/ ****** ************************************************** ******** / 
+
+
+// SFR INT_CLKO = 0x8F; // additional SFR WAKE_CLKO (address: 0x8F) 
+/ * 
+    . 7. 6 5 4 3 2 1 0 the Reset the Value 
+    - EX2 EX3 EX4 - T2CLKO T1CLKO T0CLKO 0000,0000B 
+b6 - EX4: external interrupt INT4 allow 
+b5 - EX3: external interrupt INT3 allows 
+b4 - EX2: external interrupt INT2 allow 
+b2 - T1CLKO: allows T2 overflow pulse at P3.0 output pin, Fck1 = 1/2 T1 overflow rate 
+b1 - T1CLKO : allow T1 overflow pulse at P3.4 output pin, Fck1 = 1/2 T1 overflow rate 
+b0 - T0CLKO: allows T0 overflow pulse at P3.5 output pin, Fck0 = 1/2 T0 overflow rate 
+* / 
+
+#define LVD_InterruptEnable () = 1 ELVd 
+#define LVD_InterruptDisable () ELVd = 0 
+
+
+// SFR WKTCL = 0xAA; // STC11F \ 10 series and STC15 wake-up timer low byte 
+// sfr WKTCH = 0xAB; // STC11F \ 10 series of wake-up timer and STC15 high byte 
+// of B7 B6 B5 B4 B3 B2 B1 B0 of B7 B6 B5 B4 B3 B2 B1 B0 
+// WKTEN the S7 S8 S9 S11 S10 S6 S5 S4 S3 S2 S1 S0 N * 560us 
+#define WakeTimerDisable () // WKTCH & = 0x7f WKTEN = 0 prohibited sleep wakeup timer 
+#define WakeTimerSet (scale) WKTCL = ( scale)% 256, WKTCH = (scale) / 256 | 0x80 // WKTEN = 1 to allow the sleep wake-up timer 
+
+
+// sfr CLK_DIV = 0x97; // clock Divder system clock frequency - - - - - CLKS2 CLKS1 CLKS0 and the actual XXXX, X000 
+#define SYSTEM_CLK_1T () CLK_DIV & = ~ 0x07 // default 
+#define SYSTEM_CLK_2T () CLK_DIV = (CLK_DIV & ~ 0x07) | 1 
+#define SYSTEM_CLK_4T () = CLK_DIV (CLK_DIV & ~ 0x07) | 2 
+#define SYSTEM_CLK_8T () CLK_DIV = (CLK_DIV & ~ 0x07) | 3 
+#define SYSTEM_CLK_16T () CLK_DIV = (CLK_DIV & ~ 0x07) | 4 
+#define SYSTEM_CLK_32T () CLK_DIV = (CLK_DIV & 0x07 ~) | 5 
+#define SYSTEM_CLK_64T () CLK_DIV = (CLK_DIV & ~ 0x07) |. 6 
+#define SYSTEM_CLK_128T () CLK_DIV = CLK_DIV |. 7 
+
+#define MCLKO_P54_None () CLK_DIV & = ~ 0xC0 // master clock is not output 
+#define MCLKO_P54_DIV1 ( ) CLK_DIV = (CLK_DIV & ~ 0xc0 ) | 0x40 // regardless of the master clock frequency output 
+#define MCLKO_P54_DIV2 () CLK_DIV = (CLK_DIV & ~ 0xc0) | 0x80 // master clock divided by 2 output 
+#define MCLKO_P54_DIV4 () CLK_DIV = CLK_DIV | 0xc0 // master clock divided output 
+
+#define MCLKO_P34_None () CLK_DIV & = ~ 0xc0 // master clock is not output 
+#define MCLKO_P34_DIV1 () CLK_DIV = (CLK_DIV & ~ 0xc0) | 0x40 // master clock output frequency regardless of 
+# define MCLKO_P34_DIV2 () CLK_DIV = (CLK_DIV & ~ 0xc0) | 0x80 // master clock divided by 2 output 
+#define MCLKO_P34_DIV4 () CLK_DIV = CLK_DIV | 0xc0 // master clock divided output 
+
+// sfr BUS_SPEED = 0xA1; // Stretch Register - - - - - - EXRTS1 EXRTSS0 XXXX, xx10 
+#define BUS_SPEED_1T () BUS_SPEED = 0 
+#define BUS_SPEED_2T () BUS_SPEED = 1 
+#define BUS_SPEED_4T () BUS_SPEED = 2 
+#define BUS_SPEED_8T () BUS_SPEED = 3 
+
+/ * interrupt the Vector * / 
+INT0_VECTOR 0 #define 
+#define TIMER0_VECTOR 1 
+#define INT1_VECTOR 2 
+#define TIMER1_VECTOR 3 
+#define UART1_VECTOR 4 
+#define ADC_VECTOR 5 
+#define LVD_VECTOR. 6 
+#define PCA_VECTOR. 7 
+#define UART2_VECTOR. 8 
+#define SPI_VECTOR. 9 
+#define INT2_VECTOR 10 
+#define INT3_VECTOR. 11 
+#define 12 TIMER2_VECTOR 
+#define INT4_VECTOR 16 
+#define UART3_VECTOR 17 
+#define UART4_VECTOR 18 
+#define TIMER3_VECTOR 19 
+#define TIMER4_VECTOR 20 
+#define CMP_VECTOR 21 
+
+
+#define TRUE 1 
+#define FALSE 0 
+
+// ============== =============================================== 
+
+// = ======================================= 
+
+#define PolityLow low priority interrupt 0 // 
+# define PolityHigh 1 // high priority interrupt 
+
+// ======================================= = 
+
+#define MCLKO_None 0 
+#define MCLKO_DIV1 1 
+#define MCLKO_DIV2 2 
+#define MCLKO_DIV4 3 
+
+#define the ENABLE 1 
+#define the DISABLE 0 
+
+#define STC15F_L2K08S2. 8 
+#define STC15F_L2K16S2 16 
+#define STC15F_L2K24S2 24 
+#define STC15F_L2K32S2 32 
+#define STC15F_L2K40S2 40 
+#define STC15F_L2K48S2 48 
+# STC15F_L2K56S2 56 DEFINE 
+#define STC15F_L2K60S2 60 
+#define IAP15F_L2K61S2 61 
+
+#endif
