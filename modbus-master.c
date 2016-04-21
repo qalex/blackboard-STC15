@@ -3,8 +3,9 @@
 #include <modbus/modbus-rtu.h>
 #include <errno.h>
 #include <stdlib.h>
+#include "protocol.h"
 
-const int num_regs = 10;
+
 int main(int argc,char *argv[]){
 //Create a new RTU context with proper serial parameters (in this example,
 //device name /dev/ttyS0, baud rate 9600, no parity bit, 8 data bits, 1 stop bit)
@@ -38,17 +39,17 @@ if (modbus_connect(ctx) == -1) {
 modbus_set_slave(ctx, 1);
 
 
-uint16_t reg[num_regs];// will store read registers values
+uint16_t reg[TOTAL_REGS_SIZE];// will store read registers values
 
 //Read 5 holding registers starting from address 10
-int num = modbus_read_registers(ctx, 0, num_regs, reg);
-if (num != num_regs) {// number of read registers is not the one expected
+int num = modbus_read_registers(ctx, 0, TOTAL_REGS_SIZE, reg);
+if (num != TOTAL_REGS_SIZE) {// number of read registers is not the one expected
     fprintf(stderr, "Failed to read: %s\n", modbus_strerror(errno));
 }
-for (int i = 0; i < num_regs; i++)
+for (int i = 0; i < TOTAL_REGS_SIZE; i++)
   printf("%d: %d\n", i, reg[i]);
 
-modbus_write_register(ctx, 5, !reg[5]);
+modbus_write_register(ctx, BEEPER, !reg[BEEPER]);
 modbus_close(ctx);
 modbus_free(ctx);
 
