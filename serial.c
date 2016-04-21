@@ -42,6 +42,9 @@ static __bit work_flag_buffer_transfered;
 static __bit tx_serial_buffer_empty;
 static __bit rx_serial_buffer_empty;
 
+unsigned char serial_available(){
+  return(!rx_serial_buffer_empty);
+}
 
 void serial_init(void)
 {
