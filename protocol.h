@@ -3,8 +3,10 @@ enum
 {     
   // just add or remove registers and your good to go...
   // The first register starts at address 0
-  TEMP,     
+  TEMP,
+  TEMP_ERR,    
   HUMID,
+  DHT_ERR,
   LUX,        
   LEDR,
   LEDG,

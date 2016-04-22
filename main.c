@@ -46,49 +46,24 @@ void main(void) {
     modbus_configure(1, 2, TOTAL_REGS_SIZE);
   
     while(1) {
-        err = readDHT();
+    // Read the analogs
+        holdingRegs[DHT_ERR] = readDHT();
         holdingRegs[HUMID] = DHT_TP_H;
-        //if (err) {
-        //    printf("ERR:%x\n", err);
-        //} else {
-        //    printf("T:%d H:%d CR:%d\n", DHT_TP_H, DHT_RH_H, DHT_CR_D);
-        //}
-
-        err = DS18B20_readTemp();
+        holdingRegs[DHT_ERR] = DS18B20_readTemp();
         holdingRegs[TEMP] = DS18B20_decodeTemp();
-        //printf("%x: %f\n", err, DS18B20_decodeTemp());
-
         holdingRegs[LUX] = read_BH1750();
-        // printf("%u lux\n", lux);
-
-        //Delay2(1000);
-
-//        //set_pwm(200*on,0,0);
-          // BEEP = 0;
-//        BEEP = 1;
-//        DK1 = 1;
-
-
-//        set_pwm(0,0,0);
-//        Delay2(1000);
-//        set_pwm(0,200,0);
-//        Delay2(50);
-//        set_pwm(200,0,0);
-//        Delay2(100);
-//        BEEP = 0;
-//        DK1 = 0;
-
-
-        
+    // Read the digitals
+        holdingRegs[B1_STATE] = 0x00;
+        holdingRegs[B2_STATE] = 0x01;  
+    // Write the Digitals     
         if (holdingRegs[BEEPER]) BEEP = 1; 
-          else BEEP = 0;
-        
+          else BEEP = 0;   
         if (holdingRegs[RELAY]) DK1 = 1; 
           else DK1 = 0;
-        
-        set_pwm(holdingRegs[LEDG],holdingRegs[LEDG],holdingRegs[LEDG]);
-        holdingRegs[B1_STATE] = 0x00;
-        holdingRegs[B2_STATE] = 0x01;
+          
+    // Write the PWM LEDS    
+        set_pwm((unsigned char)holdingRegs[LEDG],(unsigned char)holdingRegs[LEDG],(unsigned char)holdingRegs[LEDG]);
+
         // Service the modbus request if it is there
         holdingRegs[TOTAL_ERRORS] = modbus_update(holdingRegs);
     }
