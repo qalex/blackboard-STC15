@@ -58,9 +58,9 @@ void main(void) {
         holdingRegs[DHT_ERR] = DS18B20_readTemp();
         holdingRegs[DS18B20T] = DS18B20_decodeTemp();
         holdingRegs[LUX] = read_BH1750();
-    // Read the digitals
-        holdingRegs[B1_STATE] = 0x00;
-        holdingRegs[B2_STATE] = 0x01;  
+    // Read the Buttons
+        holdingRegs[BUTTON1] = K1;
+        holdingRegs[BUTTON2] = K3;  
     // Write the Digitals     
         if (holdingRegs[BEEPER]) BEEP = 1; 
           else BEEP = 0;   

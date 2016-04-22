@@ -17,8 +17,8 @@ enum
   LEDB,
   RELAY, 
   BEEPER, 
-  B1_STATE,
-  B2_STATE,
+  BUTTON1,
+  BUTTON2,
   TOTAL_ERRORS,
   // leave this one
   TOTAL_REGS_SIZE 
