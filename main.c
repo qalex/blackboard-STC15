@@ -42,15 +42,21 @@ void main(void) {
      The transmit enable pin is used in half duplex communication to activate a MAX485 or similar
      to deactivate this mode use any value < 2 because 0 & 1 is reserved for Rx & Tx
   */
-  
+    set_pwm(0,0,0);
+    
     modbus_configure(1, 2, TOTAL_REGS_SIZE);
   
     while(1) {
     // Read the analogs
         holdingRegs[DHT_ERR] = readDHT();
-        holdingRegs[HUMID] = DHT_TP_H;
+        holdingRegs[TEMPH] = DHT_TP_H;
+        holdingRegs[HUMIDH] = DHT_RH_H;
+        holdingRegs[TEMPL] = DHT_TP_L;
+        holdingRegs[HUMIDL] = DHT_RH_L;
+        holdingRegs[DHTCHSUM] = DHT_CR_D;
+    // Untested peripherals
         holdingRegs[DHT_ERR] = DS18B20_readTemp();
-        holdingRegs[TEMP] = DS18B20_decodeTemp();
+        holdingRegs[DS18B20T] = DS18B20_decodeTemp();
         holdingRegs[LUX] = read_BH1750();
     // Read the digitals
         holdingRegs[B1_STATE] = 0x00;
