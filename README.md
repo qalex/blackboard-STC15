@@ -20,6 +20,10 @@ What it supports for now:
 * [x] Using PWM to flash on-board RGB LEDs
 * [x] On-board beeper
 * [x] On-board relay
+* [X] Second uart for communicating with the ESP8266
+* [X] MCU Modbus client communication to read/write some of the peripherals based on https://github.com/angeloc/simplemodbusng
+* [X] Linux modbus-master test program based on libmodbus for bypassing the ESP8266
 
 TODO
-* [ ] 2nd UART to interface ESP chip
+* [X] Complete accessing all MCU peripherals via modbus
+* [X] Implement modbus master in ESP8266 for access to MCU peripherals
