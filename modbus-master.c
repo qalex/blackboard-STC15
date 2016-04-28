@@ -48,11 +48,12 @@ if (num != TOTAL_REGS_SIZE) {// number of read registers is not the one expected
 }
 for (int i = 0; i < TOTAL_REGS_SIZE; i++)
   printf("%d: %d\n", i, reg[i]);
-
-modbus_write_register(ctx,LEDR,250);
-modbus_write_register(ctx,LEDG,250);
-modbus_write_register(ctx,LEDB,250);
-modbus_write_register(ctx, BEEPER, !reg[BEEPER]);
+  if (reg[WIFIPOWEROFF] == 0)
+    modbus_write_register(ctx,WIFIPOWEROFF,20);
+//modbus_write_register(ctx,LEDR,250);
+//modbus_write_register(ctx,LEDG,250);
+//modbus_write_register(ctx,LEDB,250);
+//modbus_write_register(ctx, BEEPER, !reg[BEEPER]);
 modbus_close(ctx);
 modbus_free(ctx);
 

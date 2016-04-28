@@ -21,6 +21,7 @@ void putchar (char c) {
     serial_putc(c);
 }
 
+#define COUNT 25
 
 unsigned int  __xdata holdingRegs[TOTAL_REGS_SIZE]; // function 3 and 16 register array
 
@@ -28,6 +29,7 @@ void main(void) {
     u8 i = 0;
     u8 err = 0;
     u16 lux = 0;
+    u8 seconds = COUNT;
 
     PWM(1,1,1);
     timer0_ini();
@@ -45,6 +47,9 @@ void main(void) {
     set_pwm(0,0,0);
     
     modbus_configure(1, 2, TOTAL_REGS_SIZE);
+// Power up the ESP8266    
+    WIFI_VCC = 0;
+    holdingRegs[WIFIPOWEROFF] = 0;
   
     while(1) {
     // Read the analogs
@@ -59,9 +64,13 @@ void main(void) {
         holdingRegs[DS18B20T] = DS18B20_decodeTemp();
         holdingRegs[LUX] = read_BH1750();
     // Read the Buttons and latch - need to be unlatched by the modbus master
-	if (K1)
+        // holdingRegs[DHT_ERR] = DS18B20_readTemp();
+        // holdingRegs[DS18B20T] = DS18B20_decodeTemp();
+        // holdingRegs[LUX] = read_BH1750();
+    // Read the Buttons and latch - need to be unlatched by the modbus master
+	      if (K1)
         	holdingRegs[BUTTON1] = 1;
-	if (K3)
+	      if (K3)
         	holdingRegs[BUTTON2] = 1;  
     // Write the Digitals     
         if (holdingRegs[BEEPER]) BEEP = 1; 
@@ -70,7 +79,24 @@ void main(void) {
           else DK1 = 0;
           
     // Write the PWM LEDS    
-        set_pwm((unsigned char)holdingRegs[LEDG],(unsigned char)holdingRegs[LEDG],(unsigned char)holdingRegs[LEDG]);
+        set_pwm((unsigned char)holdingRegs[LEDR],(unsigned char)holdingRegs[LEDG],(unsigned char)holdingRegs[LEDB]);
+        
+    // Support for powering off the ESP8266 via modbus
+        if (seconds >0) {
+          seconds--;
+          // holdingRegs[BEEPER] = 0;
+        } else {
+          // holdingRegs[BEEPER] = 1;
+          seconds = COUNT;
+             // Power off the ESP8266 when an integer (number of seconds) has been placed in the holding register 
+          if (holdingRegs[WIFIPOWEROFF]) {
+            WIFI_VCC = 1;
+            holdingRegs[WIFIPOWEROFF]--;
+          } else {
+            WIFI_VCC = 0;    
+          }
+        }
+ 
 
         // Service the modbus request if it is there
         holdingRegs[TOTAL_ERRORS] = modbus_update(holdingRegs);

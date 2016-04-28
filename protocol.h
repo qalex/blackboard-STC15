@@ -19,6 +19,7 @@ enum
   BEEPER, 
   BUTTON1,
   BUTTON2,
+  WIFIPOWEROFF,
   TOTAL_ERRORS,
   // leave this one
   TOTAL_REGS_SIZE 
