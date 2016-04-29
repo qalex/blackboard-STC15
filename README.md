@@ -11,12 +11,12 @@ Install both sdcc and stcgal per instructions (or use distribution packages for 
 Programming the MCU is via a USB to serial converter connected to connector 3P, the BetaBlack MCU programming pins on /dev/ttyUSB0
 Modbus communications is via the alternative pins connected to the ESP8266 via jumpers. These jumpers can be removed and a second USB to Serial converter used for testing via /dev/ttyUSB1.
 
-cd blackboard-STC15
-make
-make install # will download to the MCU
+    cd blackboard-STC15
+    make
+    make install # will download to the MCU
 
 Build the modbus-master program for testing communication
-make modbus-master
+    make modbus-master
 
 
 
