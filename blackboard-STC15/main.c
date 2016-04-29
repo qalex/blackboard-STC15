@@ -64,10 +64,6 @@ void main(void) {
         holdingRegs[DS18B20T] = DS18B20_decodeTemp();
         holdingRegs[LUX] = read_BH1750();
     // Read the Buttons and latch - need to be unlatched by the modbus master
-        // holdingRegs[DHT_ERR] = DS18B20_readTemp();
-        // holdingRegs[DS18B20T] = DS18B20_decodeTemp();
-        // holdingRegs[LUX] = read_BH1750();
-    // Read the Buttons and latch - need to be unlatched by the modbus master
 	      if (K1)
         	holdingRegs[BUTTON1] = 1;
 	      if (K3)
