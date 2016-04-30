@@ -16,6 +16,7 @@ Modbus communications is via the alternative pins connected to the ESP8266 via j
     make install # will download to the MCU
 
 Build the modbus-master program for testing communication
+
     make modbus-master
 
 
