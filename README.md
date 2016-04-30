@@ -19,7 +19,21 @@ Build the modbus-master program for testing communication
 
     make modbus-master
 
-
+Build ESP8266 code
+Use Arduino ESP8266 generic
+- Open blackboard-ESP8266
+- Edit SSID.h to suit your wifi network
+- Remove the bridges between the WFI_GND, WFI_TX and WFI_RX
+- Connect ESP8266 to USB-Serial converter to the WFI side (USB RX -> WFI_TX and vice versa)
+- Bridge jumper WiFi_0 to enable ESP8266 programming mode
+- Power on the BetaBlack
+- Upload to the ESP8266
+- Power off the BetaBlack
+- Remove the USB serial and re-insert the bridges
+- Power on the BetaBlack
+- The ESP8266 will join your network and your DHCP will give it an address. You need to find the IP address it has joined as by looking at your router for address allocations
+- curl http://your_ip_address (Gives the current register values)
+- curl http://your_ip_address/status (Gives the modbus comms status)
 
 
 What it supports for now:
@@ -34,6 +48,7 @@ What it supports for now:
 * [X] MCU Modbus client communication to read/write some of the peripherals based on https://github.com/angeloc/simplemodbusng
 * [X] Linux modbus-master test program based on libmodbus for bypassing the ESP8266
 * [X] Implement a timer to power off the ESP8266 by the STC15
+* [X] Implement modbus master in ESP8266 for read state of MCU peripherals
 
 TODO
-* [X] Implement modbus master in ESP8266 for access to MCU peripherals
+* [] Implement modbus writes to the relay etc
