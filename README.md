@@ -34,6 +34,10 @@ Use Arduino ESP8266 generic
 - The ESP8266 will join your network and your DHCP will give it an address. You need to find the IP address it has joined as by looking at your router for address allocations
 - curl http://your_ip_address (Gives the current register values)
 - curl http://your_ip_address/status (Gives the modbus comms status)
+- curl http://your_ip_address/relayon 
+- curl http://your_ip_address/relayoff 
+- curl http://your_ip_address/beepon 
+- curl http://your_ip_address/beepoff 
 
 
 What it supports for now:
@@ -49,6 +53,7 @@ What it supports for now:
 * [X] Linux modbus-master test program based on libmodbus for bypassing the ESP8266
 * [X] Implement a timer to power off the ESP8266 by the STC15
 * [X] Implement modbus master in ESP8266 for read state of MCU peripherals
+* [X] Implement writes to the beeper and relay over http
 
 TODO
-* [] Implement modbus writes to the relay etc
+* [X] Control the LEDs via http 
