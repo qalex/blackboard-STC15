@@ -80,35 +80,56 @@ void setup(void){
   server.on("/", handleRoot);
 
   server.on("/status", [](){
-    String status = status + "id: " + packets[0].id + ".\n";
-  status = status + "function: " + packets[0].function + ".\n";
-  status = status + "address: " + packets[0].address + ".\n";
-  status = status + "no_of_registers: " + packets[0].no_of_registers + ".\n"; 
+    String status;
+    for ( int i = 0; i < 2; i++) {
+      status = status + i + "id: " + packets[i].id + ".\n";
+      status = status + i + " function: " + packets[i].function + ".\n";
+      status = status + i +  " address: " + packets[i].address + ".\n";
+      status = status + i +  " no_of_registers: " + packets[i].no_of_registers + ".\n"; 
 
   
-  // modbus information counters
-  status = status + "requests: " + packets[0].requests + ".\n";
-  status = status + "successful_requests: " + packets[0].successful_requests + ".\n";
-  status = status + "total_errors: " + packets[0].total_errors + ".\n";
-  status = status + "retries: " + packets[0].retries + ".\n";
-  status = status + "timeout: " + packets[0].timeout + ".\n";
-  status = status + "incorrect_id_returned: " + packets[0].incorrect_id_returned + ".\n";
-  status = status + "incorrect_function_returned: " + packets[0].incorrect_function_returned + ".\n";
-  status = status + "incorrect_bytes_returned: " + packets[0].incorrect_bytes_returned + ".\n";
-  status = status + "checksum_failed: " + packets[0].checksum_failed + ".\n";
-  status = status + "buffer_errors: " + packets[0].buffer_errors + ".\n";
+      // modbus information counters
+      status = status + i +  " requests: " + packets[i].requests + ".\n";
+      status = status + i +  " successful_requests: " + packets[i].successful_requests + ".\n";
+      status = status + i +  " total_errors: " + packets[i].total_errors + ".\n";
+      status = status + i +  " retries: " + packets[i].retries + ".\n";
+      status = status + i +  " timeout: " + packets[i].timeout + ".\n";
+      status = status + i +  " incorrect_id_returned: " + packets[i].incorrect_id_returned + ".\n";
+      status = status + i +  " incorrect_function_returned: " + packets[i].incorrect_function_returned + ".\n";
+      status = status + i +  " incorrect_bytes_returned: " + packets[i].incorrect_bytes_returned + ".\n";
+      status = status + i +  " checksum_failed: " + packets[i].checksum_failed + ".\n";
+      status = status + i +  " buffer_errors: " + packets[i].buffer_errors + ".\n";
   
-  // modbus specific exception counters
-  status = status + "illegal_function: " + packets[0].illegal_function + ".\n";
-  status = status + "illegal_data_address: " + packets[0].illegal_data_address + ".\n";
-  status = status + "illegal_data_value: " + packets[0].illegal_data_value + ".\n";
-  status = status + "misc_exceptions: " + packets[0].misc_exceptions + ".\n";
+      // modbus specific exception counters
+      status = status + i +  " illegal_function: " + packets[0].illegal_function + ".\n";
+      status = status + i +  " illegal_data_address: " + packets[0].illegal_data_address + ".\n";
+      status = status + i +  " illegal_data_value: " + packets[0].illegal_data_value + ".\n";
+      status = status + i +  " misc_exceptions: " + packets[0].misc_exceptions + ".\n";
   
-  // connection status of packet
-  status = status + "connection: " + packets[0].connection + ".\n"; 
+      // connection status of packet
+      status = status + i +  " connection: " + packets[0].connection + ".\n"; 
+    }
     server.send(200, "text/plain", status);
   });
 
+  server.on("/relayon", [](){
+    regs[RELAY] = 1;
+    server.send(200, "text/plain", "Relay Energised\n" );
+  });
+  
+  server.on("/relayoff", [](){
+    regs[RELAY] = 0;
+    server.send(200, "text/plain", "Relay De-energised\n" );
+  });
+  server.on("/beepon", [](){
+    regs[BEEPER] = 1;
+    server.send(200, "text/plain", "Beeper Energised\n" );
+  });
+  server.on("/beepoff", [](){
+    regs[BEEPER] = 0;
+    server.send(200, "text/plain", "Beeper De-energised\n" );
+  });
+  
   server.onNotFound(handleNotFound);
 
   server.begin();
@@ -118,7 +139,7 @@ void setup(void){
   packets[0].id = 1;
   packets[0].function = READ_HOLDING_REGISTERS;
   packets[0].address = 0;
-  packets[0].no_of_registers = TOTAL_REGS_SIZE;
+  packets[0].no_of_registers = LEDR; // First writable register
   packets[0].register_array = regs;
     // write the last registers to the 8051 starting at address LEDR
   packets[1].id = 1;
@@ -126,7 +147,7 @@ void setup(void){
   packets[1].address = LEDR;
   packets[1].no_of_registers = TOTAL_REGS_SIZE - LEDR;
   packets[1].register_array = &regs[LEDR];
-  modbus_configure(BAUD, TIMEOUT, POLLING, RETRY_COUNT, TxEnablePin, packets, 1);
+  modbus_configure(BAUD, TIMEOUT, POLLING, RETRY_COUNT, TxEnablePin, packets, 2);
 }
 
 void loop(void){
