@@ -9,7 +9,7 @@ Use [STC MCU ISP flash tool](https://github.com/grigorig/stcgal) to programm
 Install both sdcc and stcgal per instructions (or use distribution packages for sdcc)
 
 Programming the MCU is via a USB to serial converter connected to connector 3P, the BetaBlack MCU programming pins on /dev/ttyUSB0
-Modbus communications is via the alternative pins connected to the ESP8266 via jumpers. These jumpers can be removed and a second USB to Serial converter used for testing via /dev/ttyUSB1.
+Modbus communications is via the alternative pins connected to the ESP8266 via jumpers. These jumpers can be removed and a second USB to Serial converter used for testing via /dev/ttyUSB1. Refer [here](https://github.com/darrylb123/blackboard-STC15/wiki/Flashing-the-STC15-MCU) for MCU connection details.
 
     cd blackboard-STC15
     make
