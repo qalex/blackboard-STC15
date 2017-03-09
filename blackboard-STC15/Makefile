@@ -2,7 +2,7 @@
 OBJS = main.rel BH1750.rel delay.rel DHT11.rel DS18B20.rel i2c.rel PWM3.rel serial.rel timer0.rel SimpleModbusSlave.rel
 
 CC = sdcc-sdcc 
-CFLAGS = -mmcs51 
+CFLAGS = -mmcs51 --std-c99
 LFLAGS = --stack-auto
 USB = 0
 GCC = gcc
@@ -10,7 +10,7 @@ GCC = gcc
 all : main.ihx
 
 main.rel: main.c
-	$(CC) -c main.c
+	$(CC) $(CFLAGS) -c main.c
 
 BH1750.rel: BH1750.c BH1750.h
 	$(CC) $(CFLAGS) -c BH1750.c
