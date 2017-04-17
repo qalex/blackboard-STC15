@@ -1,14 +1,16 @@
 
-OBJS = main.rel BH1750.rel delay.rel DHT11.rel DS18B20.rel i2c.rel PWM3.rel serial.rel timer0.rel
+OBJS = main.rel BH1750.rel delay.rel DHT11.rel DS18B20.rel i2c.rel PWM3.rel serial.rel timer0.rel SimpleModbusSlave.rel
 
 CC = sdcc-sdcc 
-CFLAGS = -mmcs51
+CFLAGS = -mmcs51 --std-c99
+LFLAGS = --stack-auto
 USB = 0
+GCC = gcc
 
 all : main.ihx
 
 main.rel: main.c
-	$(CC) -c main.c
+	$(CC) $(CFLAGS) -c main.c
 
 BH1750.rel: BH1750.c BH1750.h
 	$(CC) $(CFLAGS) -c BH1750.c
@@ -16,7 +18,7 @@ BH1750.rel: BH1750.c BH1750.h
 delay.rel: delay.c delay.h
 	$(CC) $(CFLAGS) -c delay.c
 
-DHT11.rel: DHT11.c DHT11.h
+DHT11.rel:  DHT11.c DHT11.h
 	$(CC) $(CFLAGS) -c DHT11.c
 
 DS18B20.rel: DS18B20.c DS18B20.h
@@ -34,11 +36,19 @@ serial.rel: serial.c serial.h
 timer0.rel: timer0.c timer0.h
 	$(CC) $(CFLAGS) -c timer0.c
 
+SimpleModbusSlave.rel: SimpleModbusSlave.c SimpleModbusSlave.h
+	$(CC) $(CFLAGS) -c SimpleModbusSlave.c
+
+
 main.ihx: $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS)
+	$(CC)  $(CFLAGS) $(OBJS)
 	
+modbus-master:  modbus-master.c
+	gcc -o modbus-master modbus-master.c -l modbus
+
 clean:
-	\rm *.rel *.asm *.lst *.rst *.sym *.ihx *.map *.mem *.lk
+	\rm *.rel *.asm *.lst *.rst *.sym *.ihx *.map *.mem *.lk *.o modbus-master
 
 install:
 	stcgal -p /dev/ttyUSB$(USB) -P stc15 main.ihx
+	

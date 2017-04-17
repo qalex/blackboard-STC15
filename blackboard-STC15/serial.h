@@ -34,3 +34,4 @@ void serial_putc (unsigned char);
 unsigned char serial_getc (void);
 
 void serial_print(u8 *puts);
+unsigned char serial_available();

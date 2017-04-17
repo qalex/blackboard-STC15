@@ -42,12 +42,16 @@ static __bit work_flag_buffer_transfered;
 static __bit tx_serial_buffer_empty;
 static __bit rx_serial_buffer_empty;
 
+unsigned char serial_available(){
+  return(!rx_serial_buffer_empty);
+}
 
 void serial_init(void)
 {
     Timer2_Stop();
 
-    S1_USE_P30P31();
+    // S1_USE_P30P31(); // Use the MCU RXD/TXD programmer port for UART1
+    S1_USE_P36P37();    // Use the WIFI RXD1/TXD1 port for UART1
     S1_8bit();
     S1_RX_Enable();
     S1_BRT_UseTimer2();
