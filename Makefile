@@ -5,7 +5,7 @@ CC = sdcc
 CFLAGS = -mmcs51 --model-medium
 USB = 0
 
-TARGETS=main nextcloud-sensorlogger
+TARGETS=main nextcloud-sensorlogger esphome
 all: $(addsuffix .ihx,$(TARGETS))
 	
 %.rel: %.c
@@ -16,7 +16,7 @@ all: $(addsuffix .ihx,$(TARGETS))
 		
 		
 clean:
-	\rm *.rel *.asm *.lst *.rst *.sym *.ihx *.map *.mem *.lk
+	rm *.rel *.asm *.lst *.rst *.sym *.ihx *.map *.mem *.lk
 
 install: install-main
 	
