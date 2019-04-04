@@ -38,6 +38,41 @@ unsigned int parse_char()
 	tmp[3]=0;
 	return atoi(tmp);	
 }
+#if 0
+void nice_init()
+{
+	RF=0;
+}
+
+void nice_send_header()
+{
+	RF=1;
+	Delay2(1500);
+	RF=0;
+	Delay2(1500);
+}
+
+void nice_send_one()
+{
+	RF=1;
+	Delay2(1000);
+	RF=0;
+	Delay2(500);
+}
+
+void nice_send_zero()
+{
+	RF=1;
+	Delay2(500);
+	RF=0;
+	Delay2(1000);
+}
+
+nice_xmit(int button, int reps)
+{
+
+}
+#endif
 
 void main(void)
 {
@@ -51,10 +86,9 @@ void main(void)
 	g = 0;
 	b = 0;
 	PWM(r, g, b);
-	Delay2(1500);
-
-
+	BEEP=0;
 	printf("esphome stc slave. (c) Necromancer 2019\n");	
+	Delay2(5000);
 	S1_USE_P36P37();
 	Delay2(5000);
 	while (1) {
