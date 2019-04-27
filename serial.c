@@ -98,6 +98,7 @@ void serial_interrupt_handler(void) __interrupt(4) __using(1)
 
 void serial_putc(unsigned char c)
 {
+    while (stx_index_in == stx_index_out + 1);;
     stx_buffer[stx_index_in++]=c;
     ES=0;
     if ( tx_serial_buffer_empty )
@@ -115,9 +116,16 @@ void serial_print(u8 *puts)
 
 unsigned char serial_getc(void)
 {
-    unsigned char tmp = srx_buffer[srx_index_out++];
+    unsigned char tmp;
+    while(rx_serial_buffer_empty);;
+    tmp = srx_buffer[srx_index_out++];
     ES=0;
     if ( srx_index_out == srx_index_in) rx_serial_buffer_empty = 1;
     ES=1;
     return tmp;
+}
+
+unsigned char serial_avail()
+{
+        return !rx_serial_buffer_empty;
 }

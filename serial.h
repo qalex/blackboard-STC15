@@ -32,5 +32,5 @@ void serial_init (void);
 void serial_interrupt_handler (void) __interrupt (4) __using (1);
 void serial_putc (unsigned char);
 unsigned char serial_getc (void);
-
+unsigned char serial_avail();
 void serial_print(u8 *puts);

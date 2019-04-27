@@ -1,0 +1,98 @@
+esphome:
+  name: $devicename
+  platform: ESP8266
+  board: esp_wroom_02
+  build_path: build/gatecontrol
+  includes:
+    - stc15component.h
+    - stc15pwm.h
+
+substitutions:
+  devicename: "gatecontrol"
+
+wifi:
+  networks:
+  - ssid: frostgate
+    password: XXXXXXX
+  - ssid: sensorgate
+    password: XXXXXXX
+  - ssid: testgate
+    password: XXXXXXX
+
+ota:
+  safe_mode: True
+  password: updateme
+
+api:
+
+web_server:
+  port: 80
+
+time:
+- platform: homeassistant
+
+uart:
+  id: uart
+  baud_rate: 115200
+  tx_pin: GPIO1
+  rx_pin: GPIO3
+
+light:
+  - platform: rgb
+    name: "RGB Ring"
+    red: red
+    green: green
+    blue: blue
+
+
+output:
+- platform: custom
+  type: float
+  lambda: |-
+    auto stcR = new STC15FloatOutput(id(uart),'R');
+    App.register_component(stcR);
+    auto stcG = new STC15FloatOutput(id(uart),'G');
+    App.register_component(stcG);
+    auto stcB = new STC15FloatOutput(id(uart),'B');
+    App.register_component(stcB);
+    return {stcR, stcG, stcB};
+  outputs:
+    - id: red
+    - id: green
+    - id: blue
+
+sensor:
+- platform: custom
+  lambda: |-
+    auto stc = new STC15Component(id(uart), 15000);
+    App.register_component(stc);
+    return {stc->temperature, stc->humidity};
+  sensors:
+  - name: "Temperature Sensor"
+    unit_of_measurement: "°C"
+    accuracy_decimals: 1
+  - name: "Humidity Sensor"
+    unit_of_measurement: "%"
+    accuracy_decimals: 1
+
+switch:
+#Toggles relay
+  - platform: uart
+    name: "Gate Control"
+    data: 'p'
+    icon: mdi:gate
+  - platform: uart
+    name: "Beep"
+    data: 'b'
+    icon: mdi:alert
+
+# Uncomment if you need to switch relay on/off
+#  - platform: uart
+#    name: "Relay on"
+#    data: 'S'
+#  - platform: uart
+#    name: "Relay off"
+#    data: 's'
+
+    
+    
